@@ -3,7 +3,7 @@ package dao;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Medicamento;
@@ -12,12 +12,14 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 	
 	public final static int TAM_NOMBRE = 30;
 	public final static int TAM_REGISTRO = 88;
-	
+	public final static String RUTA = "Medicamentos.dat";
+
 	@Override
 	public boolean guardar(Medicamento medicamento) {
 		try {
-			RandomAccessFile out = new RandomAccessFile("Medicamentos.dat", "rw");
-			int pos = (medicamento.getCod()-1*TAM_REGISTRO);
+			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			int pos = ((medicamento.getCod()-1)*TAM_REGISTRO);
+			out.seek(pos);
 			out.writeInt(medicamento.getCod());
 			StringBuilder sb = new StringBuilder(medicamento.getNombre());
 			sb.setLength(TAM_NOMBRE);
@@ -41,8 +43,42 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 
 	@Override
 	public Medicamento buscar(String nombre) {
-		
-		return null;
+		List<Medicamento> lista =new ArrayList<>();
+		Medicamento med = new Medicamento();
+		try {
+			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			char[] nom = new char[TAM_NOMBRE];
+			char letra;
+			for (int i=0; i< out.length();i+=TAM_REGISTRO) {
+				out.seek(i);
+				for (int j = 0; j < TAM_NOMBRE; j++) {
+					letra = out.readChar();
+					if (letra != 0) {
+						nom[j]=letra;
+					}else{
+						nom[j]=' ';
+					}
+
+				}
+				if (new String(nom).equals(nombre)) {
+					med.setNombre(new String(nom));
+					med.setPrecio(out.readDouble());
+					med.setStock(out.readInt());
+					med.setStockMaximo(out.readInt());
+					med.setStockMinimo(out.readInt());
+					med.setCodProveedor(out.readInt());
+					break;
+				}
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+		return med;
 	}
 
 	@Override
@@ -61,6 +97,7 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 
 	@Override
 	public List<Medicamento> leerTodos() {
+
 		return null;
 	}
 

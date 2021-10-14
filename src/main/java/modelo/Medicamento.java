@@ -86,10 +86,10 @@ public class Medicamento {
 	@Override
 	public String toString() {
 		return "Codigo: " + cod +
-				"Nombre: " + nombre +
-				"Precio: " + precio +
-				"Stock: " + stock +
-				"Proveedor: " + codProveedor;
+				"\tNombre: " + nombre +
+				"\tPrecio: " + precio +
+				"\tStock: " + stock +
+				"\tProveedor: " + codProveedor;
 	}
 
 	@Override

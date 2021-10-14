@@ -52,7 +52,8 @@ class Main {
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
 
 		med.guardar(new Medicamento("Aspirina",50,1,6,50,0,69));
-
+		Medicamento medic = med.buscar("Aspirina");
+		System.out.println(medic.toString()+"AAAAAAAAAAA");
 		// ejemploJaxb();
 		// ejemploEscribirDOM();
 		// ejemploLeerDOM();
