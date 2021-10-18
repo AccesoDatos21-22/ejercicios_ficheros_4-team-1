@@ -43,7 +43,7 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 		return false;
 	}
 
-	@Override
+	/*@Override
 	public Medicamento buscar(String nombre) {
 		Medicamento med = new Medicamento();
 		try {
@@ -83,15 +83,18 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 
 		return null;
 	}
-
-	public Medicamento buscarCode(int codigo) {
+*/
+	@Override
+	public Medicamento buscar(int codigo) {
 		Medicamento med = new Medicamento();
 		try {
 			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
 			char[] nom = new char[TAM_NOMBRE];
 			char letra;
-			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
-				out.seek(i);
+			if ((codigo - 1) * TAM_REGISTRO > out.length()) {
+				return null;
+			} else {
+				out.seek((codigo - 1) * TAM_REGISTRO);
 				med.setCod(out.readInt());
 				for (int j = 0; j < TAM_NOMBRE; j++) {
 					letra = out.readChar();
@@ -109,10 +112,6 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				med.setStockMaximo(out.readInt());
 				med.setStockMinimo(out.readInt());
 				med.setCodProveedor(out.readInt());
-				if (codigo == med.getCod()) {
-					out.close();
-					return med;
-				}
 			}
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -121,7 +120,7 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 			e.printStackTrace();
 		}
 
-		return null;
+		return med;
 	}
 
 	@Override

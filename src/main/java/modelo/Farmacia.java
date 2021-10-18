@@ -33,7 +33,7 @@ public class Farmacia implements MedicamentoDAO {
 	}
 
 	@Override
-	public Medicamento buscar(String nombre) {
+	public Medicamento buscar(int codigo) {
 		return null;
 	}
 

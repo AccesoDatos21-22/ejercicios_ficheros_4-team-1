@@ -9,15 +9,30 @@ public class Medicamento {
 	private String nombre; // tamaño 30, 60 bytes
 	private double precio; // 8 bytes
 	private int cod; // 4 bytes
+	private static int cont = 0;
 	private int stock; // 4 bytes
 	private int stockMaximo; // 4 bytes
 	private int stockMinimo; // 4 bytes
 	private int codProveedor; // 4 bytes
 
 
-	public Medicamento() {}
+	/*public Medicamento() {
+		cont++;
+		cod = cont;
+	}*/
 
-	public Medicamento(String nombre, double precio, int cod, int stock, int stockMaximo, int stockMinimo, int codProveedor) {
+	public Medicamento(String nombre, double precio, int stock, int stockMaximo, int stockMinimo, int codProveedor) {
+		cont++;
+		this.nombre = nombre;
+		this.precio = precio;
+		this.cod=cont;
+		this.stock = stock;
+		this.stockMaximo = stockMaximo;
+		this.stockMinimo = stockMinimo;
+		this.codProveedor = codProveedor;
+	}
+
+	public Medicamento(String nombre, int cod,double precio, int stock, int stockMaximo, int stockMinimo, int codProveedor) {
 		this.nombre = nombre;
 		this.precio = precio;
 		this.cod = cod;
@@ -89,6 +104,8 @@ public class Medicamento {
 				"\nNombre: " + nombre +
 				"\nPrecio: " + precio +
 				"\nStock: " + stock +
+				"\nStock maximo: " + stockMaximo +
+				"\nStock minimo: " + stockMinimo +
 				"\nProveedor: " + codProveedor;
 	}
 

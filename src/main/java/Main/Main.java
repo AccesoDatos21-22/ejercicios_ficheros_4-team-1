@@ -51,21 +51,23 @@ class Main {
 	public static void main(String[] args) {
 
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
-		Medicamento aBorrar = new Medicamento("Aspirina",50,5,8,50,0,69);
-		med.guardar(new Medicamento("Paracetamol",50,1,8,50,0,69));
-		med.guardar(new Medicamento("Aspirinalol",50,2,8,50,0,69));
-		med.guardar(new Medicamento("Aspirinaaaaa",50,3,8,50,0,69));
-		med.guardar(new Medicamento("Paracetammmmmmmol",50,4,8,50,0,69));
-		med.guardar(new Medicamento("Aspirina",50,5,8,50,0,69));
-		med.guardar(new Medicamento("Aspirina",50,6,8,50,0,69));
-		med.guardar(new Medicamento("Aspirina",50,7,8,50,0,69));
-		med.guardar(new Medicamento("Aspirina",50,8,8,50,0,69));
-		med.actualizar(new Medicamento("AspirinaMUYGRANDE",50,8,8,50,0,69));
-		Medicamento medic = med.buscar("Paracetamol");
+		Medicamento aBorrar = new Medicamento("Aspirina",8,50,8,50,0,69);
+		med.guardar(new Medicamento("Paracetamol",50,8,50,0,69));
+		med.guardar(new Medicamento("Aspirinalol",50,8,50,0,69));
+		med.guardar(new Medicamento("Aspirinaaaaa",50,8,50,0,69));
+		med.guardar(new Medicamento("Paracetammmmmmmol",50,8,50,0,69));
+		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
+		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
+		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
+		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
+		med.actualizar(new Medicamento("AspirinaMUYGRANDE",4,50,8,50,5,69));
+		//Medicamento buscNom = med.buscar("Paracetamol");
+		Medicamento busCode = med.buscar(8);
 		List<Medicamento> list;
 		try {
 			System.out.println("Buscar");
-			System.out.println(medic.toString());
+			//System.out.println(buscNom.toString());
+			System.out.println(busCode.toString());
 			System.out.println();
 			System.out.println("Imprimir todos");
 			list = med.leerTodos();
