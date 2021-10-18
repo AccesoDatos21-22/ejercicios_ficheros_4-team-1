@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,10 +51,28 @@ class Main {
 	public static void main(String[] args) {
 
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
-
-		med.guardar(new Medicamento("Aspirina",50,1,6,50,0,69));
-		Medicamento medic = med.buscar("Aspirina");
-		System.out.println(medic.toString()+"AAAAAAAAAAA");
+		Medicamento cosita = new Medicamento("Aspirina",50,1,6,50,0,69);
+		med.guardar(new Medicamento("Paracetamol",50,5,6,50,0,69));
+		Medicamento medic = med.buscar("Paracetamol");
+		List<Medicamento> list = med.leerTodos();
+		try {
+			System.out.println("Buscar");
+			System.out.println(medic.toString());
+			System.out.println();
+			System.out.println("Imprimir todos");
+			for (Medicamento a: list) {
+				System.out.println(a.toString()+"\n");
+			}
+			System.out.println();
+			System.out.println();
+			System.out.println("Borrando...."+ med.borrar(cosita));
+			list = med.leerTodos();
+			for (Medicamento a: list) {
+				System.out.println(a.toString()+"\n");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		// ejemploJaxb();
 		// ejemploEscribirDOM();
 		// ejemploLeerDOM();
