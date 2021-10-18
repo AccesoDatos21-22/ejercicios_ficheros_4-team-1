@@ -1,9 +1,6 @@
 package dao;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +8,11 @@ import java.util.List;
 import modelo.Medicamento;
 
 public class MedicamentoAleatorio implements MedicamentoDAO {
-	
+
 	public final static int TAM_NOMBRE = 30;
 	public final static int TAM_REGISTRO = 88;
 	public final static String RUTA = "Medicamentos.dat";
+	public static RandomAccessFile asdf;
 
 	@Override
 	public boolean guardar(Medicamento medicamento) {
@@ -52,19 +50,19 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
 			char[] nom = new char[TAM_NOMBRE];
 			char letra;
-			for (int i=0; i< out.length();i+=TAM_REGISTRO) {
+			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
 				out.seek(i);
 				med.setCod(out.readInt());
 				for (int j = 0; j < TAM_NOMBRE; j++) {
 					letra = out.readChar();
 					if (letra != 0) {
-						nom[j]=letra;
-					}else{
-						nom[j]=' ';
+						nom[j] = letra;
+					} else {
+						nom[j] = ' ';
 					}
 
 				}
-				String name = new String(nom).replaceAll(" ","");
+				String name = new String(nom).replaceAll(" ", "");
 				med.setNombre(name);
 				med.setPrecio(out.readDouble());
 				med.setStock(out.readInt());
@@ -72,10 +70,51 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				med.setStockMinimo(out.readInt());
 				med.setCodProveedor(out.readInt());
 				if (name.equals(nombre)) {
-					return  med;
+					out.close();
+					return med;
 				}
 			}
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		return null;
+	}
+
+	public Medicamento buscarCode(int codigo) {
+		Medicamento med = new Medicamento();
+		try {
+			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			char[] nom = new char[TAM_NOMBRE];
+			char letra;
+			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
+				out.seek(i);
+				med.setCod(out.readInt());
+				for (int j = 0; j < TAM_NOMBRE; j++) {
+					letra = out.readChar();
+					if (letra != 0) {
+						nom[j] = letra;
+					} else {
+						nom[j] = ' ';
+					}
+
+				}
+				String name = new String(nom).replaceAll(" ", "");
+				med.setNombre(name);
+				med.setPrecio(out.readDouble());
+				med.setStock(out.readInt());
+				med.setStockMaximo(out.readInt());
+				med.setStockMinimo(out.readInt());
+				med.setCodProveedor(out.readInt());
+				if (codigo == med.getCod()) {
+					out.close();
+					return med;
+				}
+			}
+			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -87,32 +126,84 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 
 	@Override
 	public boolean actualizar(Medicamento medicamento) {
-		
-		return false;
+		Medicamento med;
+		List<Medicamento> list = new ArrayList<>();
+		boolean agtum = false;
+		try {
+			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			char[] nom = new char[TAM_NOMBRE];
+			char letra;
+			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
+				med = new Medicamento();
+				out.seek(i);
+				med.setCod(out.readInt());
+				for (int j = 0; j < TAM_NOMBRE; j++) {
+					letra = out.readChar();
+					if (letra != 0) {
+						nom[j] = letra;
+					} else {
+						nom[j] = ' ';
+					}
+
+				}
+				String name = new String(nom).replaceAll(" ", "");
+				med.setNombre(name);
+				med.setPrecio(out.readDouble());
+				med.setStock(out.readInt());
+				med.setStockMaximo(out.readInt());
+				med.setStockMinimo(out.readInt());
+				med.setCodProveedor(out.readInt());
+				if (med.getCod() == medicamento.getCod()) {
+					list.add(medicamento);
+					agtum = true;
+				} else {
+					list.add(med);
+				}
+
+			}
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (agtum) {
+			try {
+				PrintWriter pw = new PrintWriter(RUTA);
+				pw.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			for (Medicamento m : list) {
+				guardar(m);
+			}
+		}
+		return agtum;
 	}
 
 	@Override
 	public boolean borrar(Medicamento medicamento) {
-		Medicamento med = new Medicamento();
+		Medicamento med;
 		List<Medicamento> list = new ArrayList<>();
 		boolean borrado = false;
 		try {
 			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
 			char[] nom = new char[TAM_NOMBRE];
 			char letra;
-			for (int i=0; i< out.length();i+=TAM_REGISTRO) {
+			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
+				med = new Medicamento();
 				out.seek(i);
 				med.setCod(out.readInt());
 				for (int j = 0; j < TAM_NOMBRE; j++) {
 					letra = out.readChar();
 					if (letra != 0) {
-						nom[j]=letra;
-					}else{
-						nom[j]=' ';
+						nom[j] = letra;
+					} else {
+						nom[j] = ' ';
 					}
 
 				}
-				String name = new String(nom).replaceAll(" ","");
+				String name = new String(nom).replaceAll(" ", "");
 				med.setNombre(name);
 				med.setPrecio(out.readDouble());
 				med.setStock(out.readInt());
@@ -120,38 +211,31 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				med.setStockMinimo(out.readInt());
 				med.setCodProveedor(out.readInt());
 				if (medicamento.equals(med)) {
-					long pos = out.getFilePointer();
-					/*out.seek(i);*/
-					Medicamento eliminado = new Medicamento();
-					eliminado.setCod(med.getCod());
-					eliminado.setCodProveedor(0);
-					eliminado.setStockMinimo(0);
-					eliminado.setStockMaximo(0);
-					eliminado.setPrecio(0);
-					eliminado.setNombre("");
-					guardar(eliminado);
-					/*for (int k = 0; k < TAM_REGISTRO; k++) {
-						out.write(0);
-					}*/
-					//out.seek(pos);
 					borrado = true;
+				} else {
+					list.add(med);
 				}
 
 			}
+			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		/*if (borrado) {
+		if (borrado) {
+			try {
+				PrintWriter pw = new PrintWriter(RUTA);
+				pw.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			for (Medicamento m : list) {
 				guardar(m);
 			}
-		}*/
-
+		}
 		return borrado;
 	}
-
 
 
 	@Override
@@ -163,20 +247,20 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
 			char[] nom = new char[TAM_NOMBRE];
 			char letra;
-			for (int i=0; i< out.length();i+=TAM_REGISTRO) {
+			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
 				med = new Medicamento();
 				out.seek(i);
 				med.setCod(out.readInt());
 				for (int j = 0; j < TAM_NOMBRE; j++) {
 					letra = out.readChar();
 					if (letra != 0) {
-						nom[j]=letra;
-					}else{
-						nom[j]=' ';
+						nom[j] = letra;
+					} else {
+						nom[j] = ' ';
 					}
 
 				}
-				String name = new String(nom).replaceAll(" ","");
+				String name = new String(nom).replaceAll(" ", "");
 				med.setNombre(name);
 				med.setPrecio(out.readDouble());
 				med.setStock(out.readInt());
@@ -185,7 +269,7 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				med.setCodProveedor(out.readInt());
 				list.add(med);
 			}
-
+		out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
