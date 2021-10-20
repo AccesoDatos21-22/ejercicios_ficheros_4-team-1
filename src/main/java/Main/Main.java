@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,6 +23,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import dao.JCCPokemonJAXB;
+import modelo.JCCPokemon;
+import modelo.Pokemon;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -46,7 +50,14 @@ class Main {
 	private static final String DOM_XML_FILE = "xml/EmpleadosDOM.xml";
 
 	public static void main(String[] args) {
-		// ejemploJaxb();
+		JCCPokemonJAXB xa = new JCCPokemonJAXB();
+		JCCPokemon po = new JCCPokemon(new Date(System.currentTimeMillis()),5000);
+		List<Pokemon> listPo = new ArrayList<>();
+		listPo.add(new Pokemon("Chorizor", 500));
+		po.setPokemones(listPo);
+		xa.guardar(po);
+		xa.leer();
+//		ejemploJaxb();
 		// ejemploEscribirDOM();
 		// ejemploLeerDOM();
 		// ejemploEscribirXSTREAM();
