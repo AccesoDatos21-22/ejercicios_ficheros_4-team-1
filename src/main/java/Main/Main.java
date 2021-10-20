@@ -51,7 +51,7 @@ class Main {
 	public static void main(String[] args) {
 
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
-		Medicamento aBorrar = new Medicamento("Aspirina",8,50,8,50,0,69);
+		Medicamento aBorrar = new Medicamento("Aspirina",4,50,8,50,0,69);
 		med.guardar(new Medicamento("Paracetamol",50,8,50,0,69));
 		med.guardar(new Medicamento("Aspirinalol",50,8,50,0,69));
 		med.guardar(new Medicamento("Aspirinaaaaa",50,8,50,0,69));
@@ -60,8 +60,7 @@ class Main {
 		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
 		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
 		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
-		med.actualizar(new Medicamento("AspirinaGORDA",4,50,8,50,5,69));
-		//Medicamento buscNom = med.buscar("Paracetamol");
+		med.actualizar(new Medicamento("AspirinaGORDA",7,50,8,50,5,69));
 		Medicamento busCode = med.buscar(8);
 		List<Medicamento> list;
 		try {
