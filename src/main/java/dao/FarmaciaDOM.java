@@ -1,19 +1,20 @@
 package dao;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import modelo.Empleado;
 import modelo.Empresa;
 import modelo.Farmacia;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Text;
+import modelo.Medicamento;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,14 +30,55 @@ public class FarmaciaDOM{
 	/**
 	 * Lee los medicamentos de la farmacia de un fichero xml
 	 * mediante DOM
-	 * @param farmacia
+	 * @param farmaciaXML
 	 * @return
 	 */
 	public boolean leer(Path farmaciaXML) {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		DocumentBuilder builder;
+		try {
+			builder = factory.newDocumentBuilder();
+
+			Document document = builder.parse(new File(DOM_XML_FILE));
+			document.getDocumentElement().normalize();
+
+			// Obtenemos la lista de nodos con nombre empleado de todo el documento
+			NodeList medicamento = document.getElementsByTagName("Medicamento");
+
+			for (int i = 0; i < medicamento.getLength(); i++) {
+				Node emple = medicamento.item(i); // obtener un nodo
+				if (emple.getNodeType() == Node.ELEMENT_NODE) {
+					Element elemento = (Element) emple; // tipo de nodo
+					System.out.println("ID: " + getNodo("id", elemento));
+					System.out.println("Nombre: " + getNodo("nombre", elemento));
+					System.out.println("Precio: " + getNodo("precio", elemento));
+					System.out.println("stock: " + getNodo("stock", elemento));
+					System.out.println("stockMaximo: " + getNodo("stockMaximo", elemento));
+					System.out.println("stockMinimo: " + getNodo("stockMinimo", elemento));
+				}
+			}
+
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return false;
 		
 	}
-	
+
+	private static String getNodo(String etiqueta, Element elem) {
+		NodeList nodo = elem.getElementsByTagName(etiqueta).item(0).getChildNodes();
+		Node valornodo = (Node) nodo.item(0);
+		return valornodo.getNodeValue(); // devuelve el valor del nodo
+	}
+
 	/**
 	 * Guarda los medicamentos de la farmacia en un fichero XML 
 	 * mediamente DOM
@@ -55,15 +97,18 @@ public class FarmaciaDOM{
 			Document document = implementation.createDocument(null, "Farmacia", null);
 			document.setXmlVersion("1.0"); // asignamos la version de nuestro XML
 
-			for (int i = 1; i < 10; i++) {
+			List<Medicamento> meds = farmacia.leerTodos();
+
+			for (int i = 0; i < meds.size(); i++) {
+				Medicamento med = meds.get(i);
 				Element raiz = document.createElement("Medicamento");
-
 				document.getDocumentElement().appendChild(raiz);
-
-				CrearElemento("id", Integer.toString(i), raiz, document);
-				CrearElemento("nombre", "Medicamento " + i, raiz, document);
-				CrearElemento("", "01", raiz, document);
-				CrearElemento("", "1000.0", raiz, document);
+				CrearElemento("id", String.valueOf(med.getCod()), raiz, document);
+				CrearElemento("nombre", med.getNombre(), raiz, document);
+				CrearElemento("precio", String.valueOf(med.getPrecio()), raiz, document);
+				CrearElemento("stock", String.valueOf(med.getStock()), raiz, document);
+				CrearElemento("stockMaximo", String.valueOf(med.getStockMaximo()), raiz, document);
+				CrearElemento("stockMinimo", String.valueOf(med.getStockMinimo()), raiz, document);
 			}
 
 			// Creamos la fuente XML a partir del documento
@@ -81,7 +126,7 @@ public class FarmaciaDOM{
 			// System.out
 			Result console = new StreamResult(System.out);
 
-			transformer.transform(source, console);
+//			transformer.transform(source, console);
 		} catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,11 +136,11 @@ public class FarmaciaDOM{
 		}
 
 		return true;
-		
+
 	}
 
-	static void CrearElemento(String datoEmple, String valor, Element raiz, Document document) {
-		Element elem = document.createElement(datoEmple);
+	static void CrearElemento(String dato, String valor, Element raiz, Document document) {
+		Element elem = document.createElement(dato);
 		Text text = document.createTextNode(valor);
 		raiz.appendChild(elem);
 		elem.appendChild(text);

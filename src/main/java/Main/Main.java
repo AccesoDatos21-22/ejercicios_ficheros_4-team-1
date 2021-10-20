@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import dao.FarmaciaDAO;
+import dao.FarmaciaDOM;
 import modelo.Farmacia;
 import modelo.Medicamento;
 import org.w3c.dom.DOMImplementation;
@@ -45,7 +48,7 @@ class Main {
 
 	private static final String JAXB_XML_FILE = "xml/EmpresaJAXB.xml";
 	private static final String XSTREAM_XML_FILE = "xml/EmpresaXTREAM.xml";
-	private static final String DOM_XML_FILE = "xml/EmpleadosDOM.xml";
+	private static final String DOM_XML_FILE = "xml/FarmaciaDOM.xml";
 
 	public static void main(String[] args) {
 
@@ -62,9 +65,13 @@ class Main {
 		far.guardar(new Medicamento("Aspirina9", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina10", 50, 50, 50, 50, 50));
 
+		FarmaciaDOM farDOM = new FarmaciaDOM();
 
+		farDOM.guardar(far);
+
+		farDOM.leer(Path.of(DOM_XML_FILE));
 		// ejemploJaxb();
-		// ejemploEscribirDOM();
+		/*ejemploEscribirDOM();*/
 		// ejemploLeerDOM();
 		// ejemploEscribirXSTREAM();
 		// ejemploLeerXSTREAM();
