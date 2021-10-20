@@ -60,7 +60,7 @@ class Main {
 		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
 		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
 		med.guardar(new Medicamento("Aspirina",50,8,50,0,69));
-		med.actualizar(new Medicamento("AspirinaMUYGRANDE",4,50,8,50,5,69));
+		med.actualizar(new Medicamento("AspirinaGORDA",4,50,8,50,5,69));
 		//Medicamento buscNom = med.buscar("Paracetamol");
 		Medicamento busCode = med.buscar(8);
 		List<Medicamento> list;

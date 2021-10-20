@@ -16,10 +16,8 @@ public class Medicamento {
 	private int codProveedor; // 4 bytes
 
 
-	/*public Medicamento() {
-		cont++;
-		cod = cont;
-	}*/
+	public Medicamento() {
+	}
 
 	public Medicamento(String nombre, double precio, int stock, int stockMaximo, int stockMinimo, int codProveedor) {
 		cont++;

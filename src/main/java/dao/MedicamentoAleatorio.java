@@ -130,52 +130,24 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 		boolean agtum = false;
 		try {
 			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
-			char[] nom = new char[TAM_NOMBRE];
-			char letra;
-			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
-				med = new Medicamento();
-				out.seek(i);
-				med.setCod(out.readInt());
-				for (int j = 0; j < TAM_NOMBRE; j++) {
-					letra = out.readChar();
-					if (letra != 0) {
-						nom[j] = letra;
-					} else {
-						nom[j] = ' ';
-					}
-
-				}
-				String name = new String(nom).replaceAll(" ", "");
-				med.setNombre(name);
-				med.setPrecio(out.readDouble());
-				med.setStock(out.readInt());
-				med.setStockMaximo(out.readInt());
-				med.setStockMinimo(out.readInt());
-				med.setCodProveedor(out.readInt());
-				if (med.getCod() == medicamento.getCod()) {
-					list.add(medicamento);
-					agtum = true;
-				} else {
-					list.add(med);
-				}
-
+			if ((medicamento.getCod()-1)*TAM_REGISTRO < out.length()) {
+				agtum=true;
+				out.seek((medicamento.getCod()-1)*TAM_REGISTRO);
+				out.writeInt(medicamento.getCod());
+				StringBuilder sb = new StringBuilder(medicamento.getNombre());
+				sb.setLength(TAM_NOMBRE);
+				out.writeChars(sb.toString());
+				out.writeDouble(medicamento.getPrecio());
+				out.writeInt(medicamento.getStock());
+				out.writeInt(medicamento.getStockMaximo());
+				out.writeInt(medicamento.getStockMinimo());
+				out.writeInt(medicamento.getCodProveedor());
 			}
 			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		if (agtum) {
-			try {
-				PrintWriter pw = new PrintWriter(RUTA);
-				pw.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			for (Medicamento m : list) {
-				guardar(m);
-			}
 		}
 		return agtum;
 	}
