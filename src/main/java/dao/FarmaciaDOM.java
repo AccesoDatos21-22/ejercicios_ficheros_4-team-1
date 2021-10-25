@@ -59,6 +59,7 @@ public class FarmaciaDOM{
 					System.out.println("stockMinimo: " + getNodo("stockMinimo", elemento));
 				}
 			}
+			return true;
 
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
