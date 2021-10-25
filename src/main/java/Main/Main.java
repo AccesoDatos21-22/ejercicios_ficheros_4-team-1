@@ -22,6 +22,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import dao.FarmaciaXSTREAM;
+import modelo.Farmacia;
+import modelo.Medicamento;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -46,6 +49,23 @@ class Main {
 	private static final String DOM_XML_FILE = "xml/EmpleadosDOM.xml";
 
 	public static void main(String[] args) {
+		FarmaciaXSTREAM xStream = new FarmaciaXSTREAM();
+		Farmacia far = new Farmacia();
+
+		far.guardar(new Medicamento("Aspirina1", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina2", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina3", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina4", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina5", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina6", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina7", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina8", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina9", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina10", 50, 50, 50, 50, 50));
+
+		xStream.guardar(far);
+
+		xStream.leer();
 		// ejemploJaxb();
 		// ejemploEscribirDOM();
 		// ejemploLeerDOM();
@@ -150,14 +170,10 @@ class Main {
 				}
 			}
 
-		} catch (ParserConfigurationException e) {
+		} catch (ParserConfigurationException | IOException | SAXException e) {
 			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		}  // TODO Auto-generated catch block
+
 	}
 
 	// obtener información de un nodo
