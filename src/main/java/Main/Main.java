@@ -1,15 +1,13 @@
 package Main;
 
 import com.thoughtworks.xstream.XStream;
+import dao.GalapagarJSON;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import modelo.Empleado;
 import modelo.Empresa;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -26,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.SimpleTimeZone;
 
 class Main {
 
@@ -37,50 +34,10 @@ class Main {
 	public static <JsonArray> void main(String[] args) throws IOException, ParseException {
 
 		URL url = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=json&appid=479092b77bcf850403cb2aeb1a302425");
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-
-		JSONParser jsonParser = new JSONParser();
-
-		JSONObject jsonObject =(JSONObject) jsonParser.parse(reader);
+		GalapagarJSON gala = new GalapagarJSON();
+		gala.leer(url);
 
 
-		JSONObject city = (JSONObject) jsonObject.get("city");
-
-		System.out.println("Ciudad: "+city.get("name")+"\n");
-
-		JSONArray list = (JSONArray) jsonObject.get("list");
-
-		for (Object lista : list) {
-			JSONObject dias = (JSONObject) lista;
-			Date date = new Date(Long.parseLong(dias.get("dt").toString())*1000);
-			System.out.println("Dia: "+ date);
-			JSONObject tiempo = (JSONObject) dias.get("temp");
-			System.out.println("Tiempo: ");
-			System.out.println("\tDia: "+tiempo.get("day")+"º Minimo: "+tiempo.get("min")+"º Maximo: "+tiempo.get("max")+"º");
-			System.out.println("\tNoche: "+tiempo.get("night")+"º Tarde: "+tiempo.get("eve")+"º Mañana: "+tiempo.get("morn")+"º");
-			JSONObject sensasion = (JSONObject) dias.get("feels_like");
-			System.out.println("Sensacion termica: ");
-			System.out.println("\tDia: "+sensasion.get("day")+"º Noche: "+sensasion.get("night")+"º Tarde: "+sensasion.get("eve")+"º Mañana: "+sensasion.get("morn")+"º");
-			System.out.println("Presion: "+dias.get("pressure")+" Humedad: "+dias.get("humidity"));
-			System.out.println();
-		}
-
-//		Object []ob = jsonObject.values().toArray();
-//
-//		for (int i = 0; i < ob.length; i++) {
-//			if (ob[i] instanceof JSONObject) {
-//				JSONObject js = (JSONObject) ob[i];
-//				System.out.println(js.toString());
-//			}else{
-//				System.out.println(ob[i].toString());
-//			}
-//
-//
-//		}
-
-
-		reader.close();
 		// ejemploJaxb();
 		// ejemploEscribirDOM();
 		// ejemploLeerDOM();
