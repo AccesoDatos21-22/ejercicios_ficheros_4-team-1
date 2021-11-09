@@ -14,7 +14,7 @@ public interface MedicamentoDAO {
 
 	public boolean actualizar(Medicamento medicamento);
 	
-	public boolean borrar(Medicamento medicamento);	
+	public boolean borrar(Medicamento medicamento);
 	
 	public List<Medicamento> leerTodos();
 

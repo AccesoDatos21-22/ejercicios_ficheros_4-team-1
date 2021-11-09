@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +25,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import dao.FarmaciaDOM;
 import dao.MedicamentoAleatorio;
+import modelo.Farmacia;
 import modelo.Medicamento;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -46,10 +50,9 @@ class Main {
 
 	private static final String JAXB_XML_FILE = "xml/EmpresaJAXB.xml";
 	private static final String XSTREAM_XML_FILE = "xml/EmpresaXTREAM.xml";
-	private static final String DOM_XML_FILE = "xml/EmpleadosDOM.xml";
+	private static final String DOM_XML_FILE = "xml/FarmaciaDOM.xml";
 
 	public static void main(String[] args) {
-
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
 		Medicamento aBorrar = new Medicamento("Aspirina",4,50,8,50,0,69);
 		med.guardar(new Medicamento("Paracetamol",50,8,50,0,69));
@@ -83,11 +86,24 @@ class Main {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		// ejemploJaxb();
-		// ejemploEscribirDOM();
-		// ejemploLeerDOM();
-		// ejemploEscribirXSTREAM();
-		// ejemploLeerXSTREAM();
+		Farmacia far = new Farmacia();
+
+		far.guardar(new Medicamento("Aspirina1", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina2", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina3", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina4", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina5", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina6", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina7", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina8", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina9", 50, 50, 50, 50, 50));
+		far.guardar(new Medicamento("Aspirina10", 50, 50, 50, 50, 50));
+
+		FarmaciaDOM farDOM = new FarmaciaDOM();
+
+		farDOM.guardar(far);
+
+		farDOM.leer(Path.of(DOM_XML_FILE));
 	}
 
 	private static void ejemploEscribirXSTREAM() {

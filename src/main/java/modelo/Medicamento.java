@@ -1,11 +1,9 @@
 package modelo;
 
-import java.util.Objects;
-
 public class Medicamento {
-	
+
 	public final static float IVA = 0.04f;
-	
+
 	private String nombre; // tamaño 30, 60 bytes
 	private double precio; // 8 bytes
 	private int cod; // 4 bytes
@@ -112,7 +110,6 @@ public class Medicamento {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Medicamento that = (Medicamento) o;
-		return Double.compare(that.precio, precio) == 0 && cod == that.cod && stock == that.stock && stockMaximo == that.stockMaximo && stockMinimo == that.stockMinimo && codProveedor == that.codProveedor && Objects.equals(nombre, that.nombre);
+		return cod == that.cod;
 	}
-
 }
