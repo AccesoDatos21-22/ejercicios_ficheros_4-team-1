@@ -19,4 +19,4 @@ Todos los ejercicios hechos, metidos en el main, muchas pruebas.
 
 
 
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
+![](https://img.shields.io/github/issues/AccesoDatos21-22/ejercicios_ficheros_4-team-1) ![](https://img.shields.io/github/forks/AccesoDatos21-22/ejercicios_ficheros_4-team-1) ![](https://img.shields.io/github/issues/AccesoDatos21-22/ejercicios_ficheros_4-team-1) 
