@@ -1,52 +1,12 @@
 package Main;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import dao.FarmaciaDOM;
-import dao.FarmaciaXSTREAM;
-import dao.JCCPokemonJAXB;
-import dao.MedicamentoAleatorio;
-import modelo.*;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-import org.xml.sax.SAXException;
-
 import com.thoughtworks.xstream.XStream;
-import dao.GalapagarJSON;
+import dao.*;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
-import modelo.Empleado;
-import modelo.Empresa;
+import modelo.*;
 import org.json.simple.parser.ParseException;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -63,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 class Main {
 
@@ -72,14 +33,16 @@ class Main {
 
 	public static <JsonArray> void main(String[] args) throws IOException, ParseException {
 
-		//Pruebas SubirNota 2
-		URL url = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=json&appid=479092b77bcf850403cb2aeb1a302425");
-		GalapagarJSON gala = new GalapagarJSON();
-		gala.leer(url);
 
+		//Pruebas SubirNota 1
+		System.out.println("Ejecutando pruebas SubirNota1");
+		GalapagarDOM gal = new GalapagarDOM();
+		URL urlDOM = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=xml&appid=479092b77bcf850403cb2aeb1a302425");
+		gal.leer(urlDOM);
 
 
 		//Creamos MedicamentoAleatorio y guardamos medicamentos para las pruebas
+		System.out.println("Creando medicamentos y guardándolos");
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
 		Medicamento aBorrar = new Medicamento("Aspirina",4,50,8,50,0,69);
 		med.guardar(new Medicamento("Paracetamol",50,8,50,0,69));
@@ -95,6 +58,7 @@ class Main {
 		List<Medicamento> list;
 
 		//Pruebas MedicamentoAleatorio
+		System.out.println("Ejecutando pruebas MedicamentoAleatorio");
 		try {
 			System.out.println("Buscar");
 			//System.out.println(buscNom.toString());
@@ -117,6 +81,7 @@ class Main {
 		}
 
 		//Creamos farmacia y añadimos medicamentos para las pruebas
+		System.out.println("Creando Farmacia y guardando medicamentos");
 		Farmacia far = new Farmacia();
 		far.guardar(new Medicamento("Aspirina1", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina2", 50, 50, 50, 50, 50));
@@ -130,28 +95,35 @@ class Main {
 		far.guardar(new Medicamento("Aspirina10", 50, 50, 50, 50, 50));
 
 		//Pruebas DOM
+		System.out.println("Ejecutando pruebas DOM");
 		FarmaciaDOM farDOM = new FarmaciaDOM();
 		farDOM.guardar(far);
 		farDOM.leer(Paths.get(DOM_XML_FILE));
 
 		//Pruebas XSTREAM
+		System.out.println("Ejecutando pruebas XSTREAM");
 		FarmaciaXSTREAM xStream = new FarmaciaXSTREAM();
 		xStream.guardar(far);
 		xStream.leer();
 
 		//Pruebas JAXB
+		System.out.println("Ejecutando pruebas JAXB");
 		JCCPokemonJAXB xa = new JCCPokemonJAXB();
 		JCCPokemon po = new JCCPokemon(new Date(System.currentTimeMillis()),5000);
 		List<Pokemon> listPo = new ArrayList<>();
 		listPo.add(new Pokemon("Chorizor", 500));
+		listPo.add(new Pokemon("Picantu", 6969));
 		po.setPokemones(listPo);
 		xa.guardar(po);
 		xa.leer();
 
-		//Pruebas SubirNota 1
-		GalapagarDOM gal = new GalapagarDOM();
-		URL url = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=xml&appid=479092b77bcf850403cb2aeb1a302425");
-		gal.leer(url);
+
+		//Pruebas SubirNota 2
+		System.out.println("Ejecutando pruebas SubirNota 2");
+		URL urlJSON = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=json&appid=479092b77bcf850403cb2aeb1a302425");
+		GalapagarJSON gala = new GalapagarJSON();
+		gala.leer(urlJSON);
+
 	}
 
 	private static void ejemploEscribirXSTREAM() {

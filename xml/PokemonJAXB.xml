@@ -4,6 +4,10 @@
         <ataque>500</ataque>
         <nombre>Chorizor</nombre>
     </pokemones>
-    <fechaLanzamiento>2021-10-20T18:55:24.285+02:00</fechaLanzamiento>
+    <pokemones>
+        <ataque>6969</ataque>
+        <nombre>Picantu</nombre>
+    </pokemones>
+    <fechaLanzamiento>2021-11-09T09:16:11.708+01:00</fechaLanzamiento>
     <numCartas>5000</numCartas>
 </JCCPokemon>
