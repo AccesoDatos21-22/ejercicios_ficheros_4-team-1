@@ -25,8 +25,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import dao.FarmaciaDOM;
 import dao.FarmaciaXSTREAM;
+import dao.MedicamentoAleatorio;
 import modelo.Farmacia;
+import modelo.Medicamento;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -98,7 +101,7 @@ class Main {
 
 		FarmaciaDOM farDOM = new FarmaciaDOM();
 		farDOM.guardar(far);
-		farDOM.leer(Path.of(DOM_XML_FILE));
+		farDOM.leer(Paths.get(DOM_XML_FILE));
 
 		FarmaciaXSTREAM xStream = new FarmaciaXSTREAM();
 		xStream.guardar(far);
