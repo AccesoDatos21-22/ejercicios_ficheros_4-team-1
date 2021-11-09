@@ -40,13 +40,29 @@ import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
-
+import dao.GalapagarJSON;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import modelo.Empleado;
 import modelo.Empresa;
+import org.json.simple.parser.ParseException;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.*;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Date;
 
 class Main {
 
@@ -54,7 +70,14 @@ class Main {
 	private static final String XSTREAM_XML_FILE = "xml/EmpresaXTREAM.xml";
 	private static final String DOM_XML_FILE = "xml/FarmaciaDOM.xml";
 
-	public static void main(String[] args) {
+	public static <JsonArray> void main(String[] args) throws IOException, ParseException {
+
+		//Pruebas SubirNota 2
+		URL url = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=json&appid=479092b77bcf850403cb2aeb1a302425");
+		GalapagarJSON gala = new GalapagarJSON();
+		gala.leer(url);
+
+
 
 		//Creamos MedicamentoAleatorio y guardamos medicamentos para las pruebas
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
