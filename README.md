@@ -20,3 +20,4 @@ Todos los ejercicios hechos, metidos en el main, muchas pruebas.
 
 
 ![](https://img.shields.io/github/issues/AccesoDatos21-22/ejercicios_ficheros_4-team-1) ![](https://img.shields.io/github/forks/AccesoDatos21-22/ejercicios_ficheros_4-team-1) ![](https://img.shields.io/github/issues/AccesoDatos21-22/ejercicios_ficheros_4-team-1) 
+
