@@ -25,11 +25,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import dao.FarmaciaDOM;
-import dao.FarmaciaXSTREAM;
-import dao.MedicamentoAleatorio;
-import modelo.Farmacia;
-import modelo.Medicamento;
+import dao.JCCPokemonJAXB;
+import modelo.JCCPokemon;
+import modelo.Pokemon;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -54,6 +52,8 @@ class Main {
 	private static final String DOM_XML_FILE = "xml/FarmaciaDOM.xml";
 
 	public static void main(String[] args) {
+
+		//Creamos MedicamentoAleatorio y guardamos medicamentos para las pruebas
 		MedicamentoAleatorio med = new MedicamentoAleatorio();
 		Medicamento aBorrar = new Medicamento("Aspirina",4,50,8,50,0,69);
 		med.guardar(new Medicamento("Paracetamol",50,8,50,0,69));
@@ -67,6 +67,8 @@ class Main {
 		med.actualizar(new Medicamento("AspirinaGORDA",7,50,8,50,5,69));
 		Medicamento busCode = med.buscar(8);
 		List<Medicamento> list;
+
+		//Pruebas MedicamentoAleatorio
 		try {
 			System.out.println("Buscar");
 			//System.out.println(buscNom.toString());
@@ -87,6 +89,8 @@ class Main {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		//Creamos farmacia y añadimos medicamentos para las pruebas
 		Farmacia far = new Farmacia();
 		far.guardar(new Medicamento("Aspirina1", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina2", 50, 50, 50, 50, 50));
@@ -99,13 +103,25 @@ class Main {
 		far.guardar(new Medicamento("Aspirina9", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina10", 50, 50, 50, 50, 50));
 
+		//Pruebas DOM
 		FarmaciaDOM farDOM = new FarmaciaDOM();
 		farDOM.guardar(far);
 		farDOM.leer(Paths.get(DOM_XML_FILE));
 
+		//Pruebas XSTREAM
 		FarmaciaXSTREAM xStream = new FarmaciaXSTREAM();
 		xStream.guardar(far);
 		xStream.leer();
+
+		//Pruebas JAXB
+		JCCPokemonJAXB xa = new JCCPokemonJAXB();
+		JCCPokemon po = new JCCPokemon(new Date(System.currentTimeMillis()),5000);
+		List<Pokemon> listPo = new ArrayList<>();
+		listPo.add(new Pokemon("Chorizor", 500));
+		po.setPokemones(listPo);
+		xa.guardar(po);
+		xa.leer();
+
 	}
 
 	private static void ejemploEscribirXSTREAM() {

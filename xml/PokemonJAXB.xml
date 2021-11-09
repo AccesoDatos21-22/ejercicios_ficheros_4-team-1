@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<JCCPokemon>
+    <pokemones>
+        <ataque>500</ataque>
+        <nombre>Chorizor</nombre>
+    </pokemones>
+    <fechaLanzamiento>2021-10-20T18:55:24.285+02:00</fechaLanzamiento>
+    <numCartas>5000</numCartas>
+</JCCPokemon>
