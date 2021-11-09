@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Path;
@@ -44,6 +45,8 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+import modelo.Empleado;
+import modelo.Empresa;
 
 class Main {
 
@@ -122,6 +125,10 @@ class Main {
 		xa.guardar(po);
 		xa.leer();
 
+		//Pruebas SubirNota 1
+		GalapagarDOM gal = new GalapagarDOM();
+		URL url = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=xml&appid=479092b77bcf850403cb2aeb1a302425");
+		gal.leer(url);
 	}
 
 	private static void ejemploEscribirXSTREAM() {
