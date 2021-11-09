@@ -11,7 +11,7 @@ Todos los ejercicios hechos, metidos en el main, muchas pruebas.
 - El resto (El resto de archivos también tienen cosas).
 
 
-> **Nota:** Todos los ejercicios los hemos hecho con amor
+> **Nota:** Todos los ejercicios los hemos hecho con **amor**.
 
 
 
