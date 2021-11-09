@@ -112,4 +112,5 @@ public class Medicamento {
 		Medicamento that = (Medicamento) o;
 		return cod == that.cod;
 	}
+
 }

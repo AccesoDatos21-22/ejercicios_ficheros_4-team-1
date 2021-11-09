@@ -25,10 +25,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import dao.FarmaciaDOM;
-import dao.MedicamentoAleatorio;
+import dao.FarmaciaXSTREAM;
 import modelo.Farmacia;
-import modelo.Medicamento;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -87,7 +85,6 @@ class Main {
 			e.printStackTrace();
 		}
 		Farmacia far = new Farmacia();
-
 		far.guardar(new Medicamento("Aspirina1", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina2", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina3", 50, 50, 50, 50, 50));
@@ -100,10 +97,12 @@ class Main {
 		far.guardar(new Medicamento("Aspirina10", 50, 50, 50, 50, 50));
 
 		FarmaciaDOM farDOM = new FarmaciaDOM();
-
 		farDOM.guardar(far);
-
 		farDOM.leer(Path.of(DOM_XML_FILE));
+
+		FarmaciaXSTREAM xStream = new FarmaciaXSTREAM();
+		xStream.guardar(far);
+		xStream.leer();
 	}
 
 	private static void ejemploEscribirXSTREAM() {

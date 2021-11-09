@@ -17,14 +17,12 @@ public class Farmacia implements MedicamentoDAO {
 
 	@Override
 	public boolean guardar(Medicamento medicamento) {
-		medicamentos.add(medicamento);
-		return false;
+		return medicamentos.add(medicamento);
 	}
 
 	@Override
 	public boolean borrar(Medicamento medicamento) {
-		medicamentos.remove(medicamento);
-		return false;
+		return medicamentos.remove(medicamento);
 	}
 
 	@Override
@@ -44,8 +42,8 @@ public class Farmacia implements MedicamentoDAO {
 
 	@Override
 	public boolean actualizar(Medicamento medicamento) {
-		for (int i = 0; i < medicamentos.size(); i++) {
-			if (medicamentos.get(i).getCod() == medicamento.getCod()){
+		for (int i=0; i < medicamentos.size(); i++) {
+			if (medicamentos.get(i).equals(medicamento)) {
 				medicamentos.set(i, medicamento);
 				return true;
 			}
