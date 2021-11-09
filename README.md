@@ -19,11 +19,4 @@ Todos los ejercicios hechos, metidos en el main, muchas pruebas.
 
 
 
-
-```mermaid
-graph LR
-A[Main] 
-A --> C(Muestra)
-D{Pruebas}
-C --> D
-```
+![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
