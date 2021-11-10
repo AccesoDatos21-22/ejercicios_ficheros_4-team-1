@@ -40,7 +40,6 @@ class Main {
 		URL urlDOM = new URL("https://api.openweathermap.org/data/2.5/forecast/daily?q=Galapagar&units=metric&mode=xml&appid=479092b77bcf850403cb2aeb1a302425");
 		gal.leer(urlDOM);
 
-
 		//Creamos MedicamentoAleatorio y guardamos medicamentos para las pruebas
 		System.out.println("Creando medicamentos y guardándolos");
 		MedicamentoAleatorio med = new MedicamentoAleatorio();

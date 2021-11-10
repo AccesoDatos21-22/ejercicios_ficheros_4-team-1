@@ -15,8 +15,9 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 
 	@Override
 	public boolean guardar(Medicamento medicamento) {
+		RandomAccessFile out = null;
 		try {
-			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			out = new RandomAccessFile(RUTA, "rw");
 			int pos = ((medicamento.getCod() - 1) * TAM_REGISTRO);
 			out.seek(pos);
 			out.writeInt(medicamento.getCod());
@@ -30,7 +31,6 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 			out.writeInt(medicamento.getStockMinimo());
 			out.writeInt(medicamento.getCodProveedor());
 
-			out.close();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -38,6 +38,12 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 
+		} finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -86,8 +92,9 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 	@Override
 	public Medicamento buscar(int codigo) {
 		Medicamento med = new Medicamento();
+		RandomAccessFile out = null;
 		try {
-			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			out = new RandomAccessFile(RUTA, "rw");
 			char[] nom = new char[TAM_NOMBRE];
 			char letra;
 			if ((codigo - 1) * TAM_REGISTRO > out.length()) {
@@ -112,11 +119,16 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				med.setStockMinimo(out.readInt());
 				med.setCodProveedor(out.readInt());
 			}
-			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return med;
@@ -127,8 +139,9 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 		Medicamento med;
 		List<Medicamento> list = new ArrayList<>();
 		boolean agtum = false;
+		RandomAccessFile out = null;
 		try {
-			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			out = new RandomAccessFile(RUTA, "rw");
 			if ((medicamento.getCod()-1)*TAM_REGISTRO < out.length()) {
 				agtum=true;
 				out.seek((medicamento.getCod()-1)*TAM_REGISTRO);
@@ -142,11 +155,16 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				out.writeInt(medicamento.getStockMinimo());
 				out.writeInt(medicamento.getCodProveedor());
 			}
-			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return agtum;
 	}
@@ -154,8 +172,9 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 	@Override
 	public boolean borrar(Medicamento medicamento) {
 		boolean borrado = false;
+		RandomAccessFile out = null;
 		try {
-				RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+				out = new RandomAccessFile(RUTA, "rw");
 				int pos = (medicamento.getCod() - 1) * TAM_REGISTRO;
 			if (pos < out.length()) {
 				out.seek(pos);
@@ -165,11 +184,16 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				}
 				borrado = true;
 			}
-			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return borrado;
 	}
@@ -180,8 +204,9 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 		List<Medicamento> list = new ArrayList<>();
 
 		Medicamento med;
+		RandomAccessFile out = null;
 		try {
-			RandomAccessFile out = new RandomAccessFile(RUTA, "rw");
+			out = new RandomAccessFile(RUTA, "rw");
 			char[] nom = new char[TAM_NOMBRE];
 			char letra;
 			for (int i = 0; i < out.length(); i += TAM_REGISTRO) {
@@ -206,11 +231,16 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 				med.setCodProveedor(out.readInt());
 				list.add(med);
 			}
-		out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return list;

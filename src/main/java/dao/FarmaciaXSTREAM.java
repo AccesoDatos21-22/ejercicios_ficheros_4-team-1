@@ -26,7 +26,6 @@ public class FarmaciaXSTREAM implements FarmaciaDAO{
 			XStream xstream = new XStream();
 			//XStream.setupDefaultSecurity(xstream);
 			//xstream.allowTypes(classes);
-
 			xstream.alias("Farmacia", Farmacia.class);
 			xstream.alias("Medicamento", Medicamento.class);
 			xstream.addImplicitCollection(Farmacia.class, "Farmacia");

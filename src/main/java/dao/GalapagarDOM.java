@@ -22,7 +22,6 @@ public class GalapagarDOM {
         try {
             System.out.println("tiem");
             builder = factory.newDocumentBuilder();
-
             Document document = builder.parse(url.openStream());
             document.getDocumentElement().normalize();
 
