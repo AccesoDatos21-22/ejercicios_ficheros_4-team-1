@@ -92,7 +92,6 @@ class Main {
 		far.guardar(new Medicamento("Aspirina8", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina9", 50, 50, 50, 50, 50));
 		far.guardar(new Medicamento("Aspirina10", 50, 50, 50, 50, 50));
-
 		//Pruebas DOM
 		System.out.println("Ejecutando pruebas DOM");
 		FarmaciaDOM farDOM = new FarmaciaDOM();
@@ -104,14 +103,21 @@ class Main {
 		FarmaciaXSTREAM xStream = new FarmaciaXSTREAM();
 		xStream.guardar(far);
 		xStream.leer();
+		xStream.guardarMedicamento(new Medicamento("AspirinaGuay", 50, 50, 50, 50, 50));
+		xStream.leerMedicamento();
 
 		//Pruebas JAXB
 		System.out.println("Ejecutando pruebas JAXB");
 		JCCPokemonJAXB xa = new JCCPokemonJAXB();
 		JCCPokemon po = new JCCPokemon(new Date(System.currentTimeMillis()),5000);
 		List<Pokemon> listPo = new ArrayList<>();
-		listPo.add(new Pokemon("Chorizor", 500));
-		listPo.add(new Pokemon("Picantu", 6969));
+		listPo.add(new Pokemon("Chorizor", 500,50,80,69,45,85,64));
+		listPo.add(new Pokemon("Picantu", 6969,89,65,28,78,96,2));
+		listPo.add(new Pokemon("Bulbanorte", 8,9,9,9,7,5,2));
+		listPo.add(new Pokemon("Magmatote", 656,656,8,9,78,9,7));
+		listPo.add(new Pokemon("Lucasio", 696449,456,77,7,78,9,2));
+		listPo.add(new Pokemon("Sudomudo", 69656569,45,8,9,9,7,9));
+		listPo.add(new Pokemon("HoHoHou", 4,89,2,28,78,7,2));
 		po.setPokemones(listPo);
 		xa.guardar(po);
 		xa.leer();

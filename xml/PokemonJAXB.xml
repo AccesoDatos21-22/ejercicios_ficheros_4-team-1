@@ -2,12 +2,74 @@
 <JCCPokemon>
     <pokemones>
         <ataque>500</ataque>
+        <ataqueEspecial>69</ataqueEspecial>
+        <defensa>80</defensa>
+        <defensaEspecial>45</defensaEspecial>
+        <nivel>85</nivel>
         <nombre>Chorizor</nombre>
+        <velocidad>64</velocidad>
+        <vida>50</vida>
     </pokemones>
     <pokemones>
         <ataque>6969</ataque>
+        <ataqueEspecial>28</ataqueEspecial>
+        <defensa>65</defensa>
+        <defensaEspecial>78</defensaEspecial>
+        <nivel>96</nivel>
         <nombre>Picantu</nombre>
+        <velocidad>2</velocidad>
+        <vida>89</vida>
     </pokemones>
-    <fechaLanzamiento>2021-11-09T09:16:11.708+01:00</fechaLanzamiento>
+    <pokemones>
+        <ataque>8</ataque>
+        <ataqueEspecial>9</ataqueEspecial>
+        <defensa>9</defensa>
+        <defensaEspecial>7</defensaEspecial>
+        <nivel>5</nivel>
+        <nombre>Bulbanorte</nombre>
+        <velocidad>2</velocidad>
+        <vida>9</vida>
+    </pokemones>
+    <pokemones>
+        <ataque>656</ataque>
+        <ataqueEspecial>9</ataqueEspecial>
+        <defensa>8</defensa>
+        <defensaEspecial>78</defensaEspecial>
+        <nivel>9</nivel>
+        <nombre>Magmatote</nombre>
+        <velocidad>7</velocidad>
+        <vida>656</vida>
+    </pokemones>
+    <pokemones>
+        <ataque>696449</ataque>
+        <ataqueEspecial>7</ataqueEspecial>
+        <defensa>77</defensa>
+        <defensaEspecial>78</defensaEspecial>
+        <nivel>9</nivel>
+        <nombre>Lucasio</nombre>
+        <velocidad>2</velocidad>
+        <vida>456</vida>
+    </pokemones>
+    <pokemones>
+        <ataque>69656569</ataque>
+        <ataqueEspecial>9</ataqueEspecial>
+        <defensa>8</defensa>
+        <defensaEspecial>9</defensaEspecial>
+        <nivel>7</nivel>
+        <nombre>Sudomudo</nombre>
+        <velocidad>9</velocidad>
+        <vida>45</vida>
+    </pokemones>
+    <pokemones>
+        <ataque>4</ataque>
+        <ataqueEspecial>28</ataqueEspecial>
+        <defensa>2</defensa>
+        <defensaEspecial>78</defensaEspecial>
+        <nivel>7</nivel>
+        <nombre>HoHoHou</nombre>
+        <velocidad>2</velocidad>
+        <vida>89</vida>
+    </pokemones>
+    <fechaLanzamiento>2021-11-11T12:57:23.339+01:00</fechaLanzamiento>
     <numCartas>5000</numCartas>
 </JCCPokemon>
